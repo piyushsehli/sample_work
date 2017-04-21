@@ -108,6 +108,31 @@
 					</label>
 				</div>				
 				
+				
+
+				<div>
+					<label>
+						<input type="text" id="pincode" name="pincode" tabindex="" placeholder="pin code:"  required>
+					</label>
+				</div>
+				
+		</div>
+	</div>
+	<div class="registration_left col-md-6">
+		 <h2>State Details</h2>
+		
+		 <div class="registration_form">
+				<!-- <div>
+					<label>
+						<input placeholder="email:" type="text" tabindex="5" id="email" name="email" required>
+					</label>
+				</div>
+				<div>
+					<label>
+						<input placeholder="password:" type="password" tabindex="5" id="password" name="password" required>
+					</label>
+				</div> -->
+
 				<div>
 					<label>
 						<input type="text" id="address" name="address" tabindex="" placeholder="address:" required>
@@ -125,36 +150,10 @@
 						<input type="text" id="cons" name="cons" tabindex="" placeholder="constituency:"  required>
 					</label>
 				</div>
-
-				<div>
-					<label>
-						<input type="text" id="pincode" name="pincode" tabindex="" placeholder="pin code:"  required>
-					</label>
-				</div>
 				
-		</div>
-	</div>
-	<div class="registration_left col-md-6">
-		<h2>Login Details</h2>
-		
-		 <div class="registration_form">
-		 <!-- Form -->
 				<div>
-					<label>
-						<input placeholder="email:" type="text" tabindex="5" id="email" name="email" required>
-						<!-- <span class="text-danger">Error in field.</span> -->
-					</label>
-				</div>
-				<div>
-					<label>
-						<input placeholder="password:" type="password" tabindex="5" id="password" name="password" required>
-						<!-- <span class="text-danger">Error in field.</span> -->
-					</label>
-				</div>
-				
-					<!-- <label class="checkbox">type="checkbox" name="agree" id="agree" <a class="terms" href="#"> terms of service</a> <input type="checkbox" name="agree" id="agree"><i></i> </label> -->
 					<label for="agree">I agree to the <a href="#">terms of service. </a> <input type="checkbox" style="margin-left: 0px; vertical-align:middle"  name="agree" id="agree"></input></label>
-						
+				</div>
 
 
 				<div>

@@ -5,7 +5,7 @@ class task
     protected $Host     = "localhost"; // Hostname of our MySQL server.
     protected $Database = "digitalnimaran"; // Logical database name on that server.
     protected $User     = "root"; // User and Password for login.
-    protected $Password = "1234";
+    protected $Password = "";
     public $con=0;  // Result of mysql_connect().
     protected $Query_ID = 0;  // Result of most recent mysql_query().
     protected $Row;// current row number.

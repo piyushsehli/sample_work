@@ -1,152 +1,119 @@
 <?php
-	include('header.php');
-	include('../config.php');
-?>
-<div class="page-container">	
-   <div class="left-content">
-	   <div class="mother-grid-inner">
-            <!--header start here-->
-				<?php
-					include('headermenu.php');
-				?>
-<!-- script-for sticky-nav -->
-		<script>
-		$(document).ready(function() {
-			 var navoffeset=$(".header-main").offset().top;
-			 $(window).scroll(function(){
-				var scrollpos=$(window).scrollTop(); 
-				if(scrollpos >=navoffeset){
-					$(".header-main").addClass("fixed");
-				}else{
-					$(".header-main").removeClass("fixed");
-				}
-			 });
-			 
-		});
-		</script>
-		<!-- /script-for sticky-nav -->
-<!--inner block start here-->
-<div class="inner-block">
-<?php
-	if(isset($_GET['id'])){
-		$id=$_GET['id'];
-		$query="DELETE FROM `enquiry` WHERE ref_no='$id'";
-		$feed=new Task();
-		mysqli_query($feed->con, $query);
-	}
-?>
-<!--market updates updates-->
-	 <div class="market-updates">
-			<div class="col-md-4 market-update-gd">
-				<div class="market-update-block clr-block-1">
-					<div class="col-md-8 market-update-left">
-						<h3>83</h3>
-						<h4>Registered User</h4>
-						<p>Other hand, we denounce</p>
-					</div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-file-text-o"> </i>
-					</div>
-				  <div class="clearfix"> </div>
+ 	session_start();
+	require_once("config.php");
+	$obj = new task();
+	$obj->checkUser();
+	require_once("headincludes.php"); ?>
+<body>
+		<!-- topbar starts -->
+		<?php require_once("topbar.php"); ?>
+	<!-- topbar ends -->
+		<div class="container-fluid">
+		<div class="row-fluid">
+				
+			<!-- left menu starts -->
+			<div class="span2 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<?php require_once("sidemenu.php"); ?>
+				</div><!--/.well -->
+			</div><!--/span-->
+			<!-- left menu ends -->
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
 				</div>
-			</div>
-			<div class="col-md-4 market-update-gd">
-				<div class="market-update-block clr-block-2">
-				 <div class="col-md-8 market-update-left">
-					<h3>135</h3>
-					<h4>Daily Visitors</h4>
-					<p>Other hand, we denounce</p>
-				  </div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-eye"> </i>
+			</noscript>
+			
+			<div id="content" class="span10">
+			<!-- content starts -->			
+			<div class="row-fluid sortable">		
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i>Enquiries</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
 					</div>
-				  <div class="clearfix"> </div>
-				</div>
-			</div>
-			<div class="col-md-4 market-update-gd">
-				<div class="market-update-block clr-block-3">
-					<div class="col-md-8 market-update-left">
-						<h3>23</h3>
-						<h4>New Messages</h4>
-						<p>Other hand, we denounce</p>
+					<div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>#ref_no</th>
+                                  <th>Name</th>
+                                  <th>Email</th>                                   
+                                  <th>Gender</th>                                  
+                                  <th>Contact Number</th>
+                                  <th>Subject</th>
+                                  <th>Details</th>
+                                  <th>Actions</th>
+							  </tr>
+						  </thead>   
+						  <tbody>
+							<?php
+								$list = new task;
+								$query = "select * from enquiry";
+								$list->query($query);
+								
+								while($list->nextRecord())
+								{
+									$ref = $list->Record['ref_no'];
+									$name = $list->Record['firstname'].$list->Record['lastname'];
+									$email = $list->Record['email'];
+									$subject = $list->Record['subject'];
+									$details = $list->Record['details'];
+									$number = $list->Record['number'];
+									$gender = $list->Record['gender'];
+									echo "<tr>";
+									
+									echo "<td class='center'>$ref</td>";
+									echo "<td class='center'>$name</td>";
+									echo "<td class='center'>$email</td>";
+									echo "<td class='center'>$gender</td>";
+									echo "<td class='center'>$number</td>";
+									echo "<td class='center'>$subject</td>";
+									echo "<td class='center'>$details</td>";
+									echo "<td class='center'>";
+									echo "<a onclick='return confirm(\"Are you sure to delete this record?\");' class='btn btn-danger' href='delenquiry.php?id=$ref'><i class='icon-trash icon-white'></i>Delete</a>";
+									
+									echo "</td>";
+									echo "</tr>";
+								}
+							?>
+						  </tbody>
+					  </table>            
 					</div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-envelope-o"> </i>
-					</div>
-				  <div class="clearfix"> </div>
-				</div>
-			</div>
-		   <div class="clearfix"> </div>
-		</div>
-<!--market updates end here-->
-<!--mainpage chit-chating-->
-<div class="chit-chat-layer1">
-	<div class="col-md-12 chit-chat-layer1-left">
-               <div class="work-progres">
-                            <div class="chit-chat-heading">
-                                  Enquiry
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th>#ref_no</th>
-                                      <th>Name</th>
-                                      <th>Email</th>                                   
-                                      <th>Gender</th>                                  
-                                      <th>Contact Number</th>
-                                      <th>Subject</th>
-                                      <th>Details</th>
-                                      <th>Actions</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              <?php
-                                $sug=new Task();
-                                $query="SELECT * from enquiry";
-                                $res=mysqli_query($sug->con, $query);
-                                while($row=mysqli_fetch_assoc($res)){
-                                	$id=$row['ref_no'];
-                                
-                              ?>
-                                <tr>
-                                  <td><?=$row['ref_no'];?></td>                               
-                                  <td><?=$row['firstname'].' '.$row['lastname'];?></td>                               
-                                  <td><?=$row['email'];?></td>                               
-                                  <td><?=$row['gender'];?></td>                               
-                                  <td><?=$row['number'];?></td>                               
-                                  <td><?=$row['subject'];?></td>                               
-                                  <td><?=$row['details'];?></td>                               
-                                  <?php echo "<td><a href='enquiry.php?id=$id'><span class='label label-danger'>Delete</span></a></td>";?>                              
-                                                             
-                              </tr>
-                              <?php
-                                }
-                              ?>
-                              
-                          </tbody>
-                      </table>
-                  </div>
-             </div>
-      </div>     
-      <div class="clearfix"> </div>
-</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
 
-</div>
-<!--inner block end here-->
-<!--copy rights start here-->
-<div class="copyrights">
-	 <p>© 2016 Shoppy. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
-</div>	
-<!--COPY rights end here-->
-</div>
-</div>
-<!--slider menu-->
-    <?php
-    	include('sidebar.php');
-    ?>
-	<div class="clearfix"> </div>
-</div>
-<?php 
-	include('footer.php');
-?>               
+			
+					<!-- content ends -->
+			</div><!--/#content.span10-->
+				</div><!--/fluid-row-->
+				
+		<hr>
+
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<a href="#" class="btn btn-primary">Save changes</a>
+			</div>
+		</div>
+
+		<?php require_once("footer.php"); ?>
+	</div><!--/.fluid-container-->
+
+	<?php require_once("includes.php"); ?>
+</body>
+</html>

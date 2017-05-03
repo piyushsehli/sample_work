@@ -55,7 +55,7 @@
 						  <tbody>
 							<?php
 								$list = new task;
-								$query = "select * from suggestions";
+								$query = "select * from feedbacks";
 								$list->query($query);
 								
 								while($list->nextRecord())
@@ -77,7 +77,7 @@
 									echo "<td class='center'>$subject</td>";
 									echo "<td class='center'>$details</td>";
 									echo "<td class='center'>";
-									echo "<a onclick='return confirm(\"Are you sure to delete this record?\");' class='btn btn-danger' href='delsuggestion.php?id=$ref'><i class='icon-trash icon-white'></i>Delete</a>";
+									echo "<a onclick='return confirm(\"Are you sure to delete this record?\");' class='btn btn-danger' href='delfeedback.php?id=$ref'><i class='icon-trash icon-white'></i>Delete</a>";
 									
 									echo "</td>";
 									echo "</tr>";

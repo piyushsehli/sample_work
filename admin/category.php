@@ -27,11 +27,33 @@
 			</noscript>
 			
 			<div id="content" class="span10">
-			<!-- content starts -->			
+			<!-- content starts -->
+			<div>
+				<?php
+						//if($_SESSION['insertright']=='y'){
+
+					?>
+				<ul class="breadcrumb">
+					<li>
+						<a href="addcategory.php" style="text-decoration:none;">
+							<img src="img/add.png" />
+							&nbsp;
+							<span style="font-weight:bold;">
+								Add New Task Category
+							</span>
+						</a>
+					</li>
+				</ul>
+				<?php
+					//}
+
+					?>
+			</div>
+			
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-user"></i>Complaints</h2>
+						<h2><i class="icon-user"></i>Task Categories</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -42,43 +64,31 @@
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						  <thead>
 							  <tr>
-								  <th>#ref_no</th>
-                                  <th>Name</th>
-                                  <th>Email</th>                                   
-                                  <th>Gender</th>                                  
-                                  <th>Contact Number</th>
-                                  <th>Subject</th>
-                                  <th>Details</th>
-                                  <th>Actions</th>
+								  <th>ID</th>
+								  <th>Task Category</th>
+								  <th class="center">Actions</th>
 							  </tr>
 						  </thead>   
 						  <tbody>
 							<?php
 								$list = new task;
-								$query = "select * from suggestions";
+								$query = "select * from category";
 								$list->query($query);
 								
 								while($list->nextRecord())
 								{
-									$ref = $list->Record['ref_no'];
-									$name = $list->Record['firstname'].$list->Record['lastname'];
-									$email = $list->Record['email'];
-									$subject = $list->Record['subject'];
-									$details = $list->Record['details'];
-									$number = $list->Record['number'];
-									$gender = $list->Record['gender'];
+									$id = $list->Record['id'];
+									$name = $list->Record['name'];
 									echo "<tr>";
-									
-									echo "<td class='center'>$ref</td>";
+									echo "<td>$id</td>";
 									echo "<td class='center'>$name</td>";
-									echo "<td class='center'>$email</td>";
-									echo "<td class='center'>$gender</td>";
-									echo "<td class='center'>$number</td>";
-									echo "<td class='center'>$subject</td>";
-									echo "<td class='center'>$details</td>";
 									echo "<td class='center'>";
-									echo "<a onclick='return confirm(\"Are you sure to delete this record?\");' class='btn btn-danger' href='delsuggestion.php?id=$ref'><i class='icon-trash icon-white'></i>Delete</a>";
-									
+									//if($_SESSION['editright']=='y'){
+										echo "<a class='btn btn-info' href='editcategory.php?id=$id'><i class='icon-edit icon-white'></i>Edit</a>&nbsp;";
+										//}
+									//if($_SESSION['deleteright']=='y'){
+										echo "<a onclick='return confirm(\"Are you sure to delete this record?\");' class='btn btn-danger' href='delcategory.php?id=$id'><i class='icon-trash icon-white'></i>Delete</a>";
+										//}
 									echo "</td>";
 									echo "</tr>";
 								}
